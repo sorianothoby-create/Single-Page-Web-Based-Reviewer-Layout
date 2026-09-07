@@ -72,3 +72,57 @@ button:hover {
     margin-top: 20px;
     margin-bottom: 8px;
 }
+
+/* MOBILE DESIGN */
+
+@media (max-width: 600px) {
+
+    header {
+        padding: 25px 15px;
+    }
+
+    header h1 {
+        font-size: 28px;
+    }
+
+    header p {
+        font-size: 15px;
+    }
+
+    main {
+        width: auto;
+        margin: 20px 15px;
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    button {
+        width: 100%;
+        padding: 20px 15px;
+        margin: 12px 0;
+
+        font-size: 18px;
+        border-radius: 10px;
+    }
+
+    #searchBar {
+        width: 100%;
+        padding: 17px;
+        font-size: 17px;
+    }
+
+    .search-title {
+        font-size: 14px;
+        margin-top: 20px;
+        margin-bottom: 8px;
+    }
+
+    .lesson p {
+        font-size: 17px;
+        line-height: 1.7;
+    }
+
+}
