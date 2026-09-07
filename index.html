@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Grade 12 Reviewer</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <header>
+        <h1>Grade 12 Reviewer</h1>
+        <p>Single-Page Web-Based Reviewer</p>
+    </header>
+
+
+    <!-- SUBJECTS -->
+
+   <main id="subjects">
+
+    <h2>Subjects</h2>
+
+    <input 
+    type="text" 
+    id="searchBar" 
+    placeholder="Search subjects or lessons..."
+    onkeyup="searchContent()"
+>
+
+<div id="searchResults"></div>
+
+        <button onclick="showSubject('oral')">
+            Oral Communication
+        </button>
+
+        <button onclick="showSubject('physical')">
+            Physical Science
+        </button>
+
+        <button onclick="showSubject('research')">
+            Practical Research
+        </button>
+
+    </main>
+
+
+    <!-- ORAL COMMUNICATION LESSONS -->
+
+    <main id="oral" class="page">
+
+        <h2>Oral Communication</h2>
+
+        <button onclick="showLesson('oralLesson1')">
+            Lesson 1
+        </button>
+
+        <button onclick="showLesson('oralLesson2')">
+            Lesson 2
+        </button>
+
+        <button onclick="showLesson('oralLesson3')">
+            Lesson 3
+        </button>
+
+        <button onclick="showSubjects()">
+            ← Back to Subjects
+        </button>
+
+    </main>
+
+
+    <!-- PHYSICAL SCIENCE LESSONS -->
+
+    <main id="physical" class="page">
+
+        <h2>Physical Science</h2>
+
+        <button onclick="showLesson('physicalLesson1')">
+            Lesson 1
+        </button>
+
+        <button onclick="showLesson('physicalLesson2')">
+            Lesson 2
+        </button>
+
+        <button onclick="showLesson('physicalLesson3')">
+            Lesson 3
+        </button>
+
+        <button onclick="showSubjects()">
+            ← Back to Subjects
+        </button>
+
+    </main>
+
+
+    <!-- PRACTICAL RESEARCH LESSONS -->
+
+    <main id="research" class="page">
+
+        <h2>Practical Research</h2>
+
+        <button onclick="showLesson('researchLesson1')">
+            Lesson 1
+        </button>
+
+        <button onclick="showLesson('researchLesson2')">
+            Lesson 2
+        </button>
+
+        <button onclick="showLesson('researchLesson3')">
+            Lesson 3
+        </button>
+
+        <button onclick="showSubjects()">
+            ← Back to Subjects
+        </button>
+
+    </main>
+
+
+    <!-- ORAL COMMUNICATION LESSON 1 -->
+
+    <main id="oralLesson1" class="lesson">
+
+        <h2>Oral Communication - Lesson 1</h2>
+
+        <p><b>Test 1 - Definition</b></p>
+
+        <p>A space for the definition.</p>
+
+        <p><b>Test 2 - Another Definition</b></p>
+
+        <p>A space for the definition.</p>
+
+        <button onclick="showSubject('oral')">
+            ← Back to Lessons
+        </button>
+
+    </main>
+
+
+    <!-- ORAL COMMUNICATION LESSON 2 -->
+
+    <main id="oralLesson2" class="lesson">
+
+        <h2>Oral Communication - Lesson 2</h2>
+
+        <p><b>Test 1 - Definition</b></p>
+
+        <p>A space for the definition.</p>
+
+        <button onclick="showSubject('oral')">
+            ← Back to Lessons
+        </button>
+
+    </main>
+
+
+    <!-- ORAL COMMUNICATION LESSON 3 -->
+
+    <main id="oralLesson3" class="lesson">
+
+        <h2>Oral Communication - Lesson 3</h2>
+
+        <p><b>Test 1 - Definition</b></p>
+
+        <p>A space for the definition.</p>
+
+        <button onclick="showSubject('oral')">
+            ← Back to Lessons
+        </button>
+
+    </main>
+
+
+    <!-- PHYSICAL SCIENCE LESSON 1 -->
+
+    <main id="physicalLesson1" class="lesson">
+
+        <h2>Physical Science - Lesson 1</h2>
+
+        <p><b>Test 1 - Definition</b></p>
+
+        <p>A space for the definition.</p>
+
+        <p><b>Test 2 - Another Definition</b></p>
+
+        <p>A space for the definition.</p>
+
+        <button onclick="showSubject('physical')">
+            ← Back to Lessons
+        </button>
+
+    </main>
+
+
+    <!-- PHYSICAL SCIENCE LESSON 2 -->
+
+    <main id="physicalLesson2" class="lesson">
+
+        <h2>Physical Science - Lesson 2</h2>
+
+        <p><b>Test 1 - Definition</b></p>
+
+        <p>A space for the definition.</p>
+
+        <button onclick="showSubject('physical')">
+            ← Back to Lessons
+        </button>
+
+    </main>
+
+
+    <!-- PHYSICAL SCIENCE LESSON 3 -->
+
+    <main id="physicalLesson3" class="lesson">
+
+        <h2>Physical Science - Lesson 3</h2>
+
+        <p><b>Test 1 - Definition</b></p>
+
+        <p>A space for the definition.</p>
+
+        <button onclick="showSubject('physical')">
+            ← Back to Lessons
+        </button>
+
+    </main>
+
+
+    <!-- PRACTICAL RESEARCH LESSON 1 -->
+
+    <main id="researchLesson1" class="lesson">
+
+        <h2>Practical Research - Lesson 1</h2>
+
+        <p><b>Test 1 - Definition</b></p>
+
+        <p>A space for the definition.</p>
+
+        <p><b>Test 2 - Another Definition</b></p>
+
+        <p>A space for the definition.</p>
+
+        <button onclick="showSubject('research')">
+            ← Back to Lessons
+        </button>
+
+    </main>
+
+
+    <!-- PRACTICAL RESEARCH LESSON 2 -->
+
+    <main id="researchLesson2" class="lesson">
+
+        <h2>Practical Research - Lesson 2</h2>
+
+        <p><b>Test 1 - Definition</b></p>
+
+        <p>A space for the definition.</p>
+
+        <button onclick="showSubject('research')">
+            ← Back to Lessons
+        </button>
+
+    </main>
+
+
+    <!-- PRACTICAL RESEARCH LESSON 3 -->
+
+    <main id="researchLesson3" class="lesson">
+
+        <h2>Practical Research - Lesson 3</h2>
+
+        <p><b>Test 1 - Definition</b></p>
+
+        <p>A space for the definition.</p>
+
+        <button onclick="showSubject('research')">
+            ← Back to Lessons
+        </button>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
