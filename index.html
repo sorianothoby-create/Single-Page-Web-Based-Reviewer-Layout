@@ -4,16 +4,15 @@
 
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Grade 12 Reviewer</title>
 
-    <meta name="description"
-          content="A web-based Grade 12 reviewer for students. Review lessons, subjects, and study materials online.">
+    <meta name="description" content="A web-based Grade 12 reviewer for students.">
 
-    <meta name="keywords"
-          content="Grade 12 reviewer, Grade 12 study reviewer, online reviewer, web-based reviewer, Philippines">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -25,62 +24,69 @@
         <p>Single-Page Web-Based Reviewer</p>
     </header>
 
-    <!-- SUBJECTS PAGE -->
+    <main id="subjects" class="page">
+        <section class="search-section">
+            <h2>Find a Lesson</h2>
+            <input
+                type="text"
+                id="searchBar"
+                placeholder="Search subjects, lessons, or keywords..."
+                oninput="searchContent()"
+                aria-label="Search subjects and lessons"
+            >
+            <div id="searchResults"></div>
+        </section>
 
-    <main id="subjects">
-
-        <h2>Subjects</h2>
-
-        <input
-            type="text"
-            id="searchBar"
-            placeholder="Search subjects or lessons..."
-            oninput="searchContent()"
-            autocomplete="off"
-        >
-
-        <div id="searchResults"></div>
-
-        <div id="subjectButtons"></div>
-
+        <section class="subject-section">
+            <div id="subjectButtons" class="button-container"></div>
+        </section>
     </main>
 
-    <!-- SUBJECT LESSONS PAGE -->
-
-    <main id="subjectPage" class="page">
-
-        <h2 id="subjectTitle"></h2>
-
-        <div id="lessonButtons"></div>
-
-        <button onclick="showSubjects()">
+    <main id="subjectPage" class="page" style="display: none;">
+        <button type="button" class="back-button" onclick="showSubjects()">
             ← Back to Subjects
         </button>
 
+        <h2 id="subjectTitle"></h2>
+
+        <div id="lessonButtons" class="button-container"></div>
     </main>
 
-    <!-- LESSON CONTENT PAGE -->
-
-    <main id="lessonPage" class="lesson">
+    <main id="lessonPage" class="page lesson" style="display: none;">
+        <button type="button" class="back-button" onclick="showSubject(currentSubject)">
+            ← Back to Lessons
+        </button>
 
         <h2 id="lessonTitle"></h2>
 
         <div id="lessonContent"></div>
-
-        <button onclick="showSubject(currentSubject)">
-            ← Back to Lessons
-        </button>
-
     </main>
 
-    <!-- LOAD LESSON DATA FIRST -->
+     
+<button
+    type="button"
+    id="floatingBackButton"
+    class="floating-back-button"
+    aria-label="Go back"
+    title="Go back"
+    onclick="goBack()"
+>
+    ← Back
+</button>
+
+
+
+    <button
+        type="button"
+        id="themeToggle"
+        class="theme-toggle"
+        aria-label="Switch to dark mode"
+    >
+        🌙
+    </button>
 
     <script src="lessons.js"></script>
-
-    <!-- LOAD WEBSITE FUNCTIONS SECOND -->
-
     <script src="script.js"></script>
 
 </body>
-
 </html>
