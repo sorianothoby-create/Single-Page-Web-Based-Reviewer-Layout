@@ -1,35 +1,23 @@
+
+let currentSubject = "oral";
+
+// ==========================================
+// HIDE ALL PAGES
+// ==========================================
+
 function hideAll() {
 
     document.getElementById("subjects").style.display = "none";
 
-    document.querySelectorAll(".page").forEach(function(page) {
-        page.style.display = "none";
-    });
+    document.getElementById("subjectPage").style.display = "none";
 
-    document.querySelectorAll(".lesson").forEach(function(lesson) {
-        lesson.style.display = "none";
-    });
+    document.getElementById("lessonPage").style.display = "none";
 
 }
 
-
-function showSubject(subject) {
-
-    hideAll();
-
-    document.getElementById(subject).style.display = "block";
-
-}
-
-
-function showLesson(lesson) {
-
-    hideAll();
-
-    document.getElementById(lesson).style.display = "block";
-
-}
-
+// ==========================================
+// SHOW SUBJECTS PAGE
+// ==========================================
 
 function showSubjects() {
 
@@ -37,215 +25,278 @@ function showSubjects() {
 
     document.getElementById("subjects").style.display = "block";
 
+    document.getElementById("searchBar").value = "";
+
+    document.getElementById("searchResults").innerHTML = "";
+
+    document.querySelectorAll("#subjectButtons button").forEach(function(button) {
+
+        button.style.display = "block";
+
+    });
+
 }
+
+// ==========================================
+// SHOW A SUBJECT'S LESSONS
+// ==========================================
+
+function showSubject(subjectId) {
+
+    const subject = reviewerData.find(function(item) {
+
+        return item.id === subjectId;
+
+    });
+
+    if (!subject) return;
+
+    currentSubject = subjectId;
+
+    hideAll();
+
+    document.getElementById("subjectTitle").textContent = subject.name;
+
+    const buttons = document.getElementById("lessonButtons");
+
+    buttons.innerHTML = "";
+
+    subject.lessons.forEach(function(lesson) {
+
+        const button = document.createElement("button");
+
+        button.textContent = lesson.title;
+
+        button.onclick = function() {
+
+            showLesson(subject.id, lesson.id);
+
+        };
+
+        buttons.appendChild(button);
+
+    });
+
+    document.getElementById("subjectPage").style.display = "block";
+
+    window.scrollTo(0, 0);
+
+}
+
+// ==========================================
+// SHOW A LESSON
+// ==========================================
+
+function showLesson(subjectId, lessonId) {
+
+    const subject = reviewerData.find(function(item) {
+
+        return item.id === subjectId;
+
+    });
+
+    if (!subject) return;
+
+    const lesson = subject.lessons.find(function(item) {
+
+        return item.id === lessonId;
+
+    });
+
+    if (!lesson) return;
+
+    currentSubject = subjectId;
+
+    hideAll();
+
+    document.getElementById("lessonTitle").textContent =
+        subject.name + " - " + lesson.title;
+
+    const content = document.getElementById("lessonContent");
+
+    content.innerHTML = "";
+
+    lesson.content.forEach(function(item) {
+
+        const heading = document.createElement("h3");
+
+        heading.textContent = item.heading;
+
+        const paragraph = document.createElement("p");
+
+        paragraph.textContent = item.text;
+        paragraph.style.whiteSpace = "pre-line";
+
+        content.appendChild(heading);
+
+        content.appendChild(paragraph);
+
+    });
+
+    document.getElementById("lessonPage").style.display = "block";
+
+    window.scrollTo(0, 0);
+
+}
+
+// ==========================================
+// GENERATE SUBJECT BUTTONS
+// ==========================================
+
+function initializeSubjects() {
+
+    const container = document.getElementById("subjectButtons");
+
+    container.innerHTML = "";
+
+    reviewerData.forEach(function(subject) {
+
+        const button = document.createElement("button");
+
+        button.textContent = subject.name;
+
+        button.onclick = function() {
+
+            showSubject(subject.id);
+
+        };
+
+        container.appendChild(button);
+
+    });
+
+}
+
+// ==========================================
+// SEARCH SUBJECTS AND LESSONS
+// ==========================================
 
 function searchContent() {
 
-    let search = document.getElementById("searchBar").value.toLowerCase().trim();
+    const search = document.getElementById("searchBar")
+        .value.toLowerCase().trim();
 
-    let results = document.getElementById("searchResults");
+    const results = document.getElementById("searchResults");
 
-    let subjectButtons = document.querySelectorAll("#subjects > button");
+    const subjectButtons = document.querySelectorAll("#subjectButtons button");
 
     results.innerHTML = "";
 
+    // Show all subject buttons when search is empty.
 
-    // If search is empty
     if (search === "") {
 
         subjectButtons.forEach(function(button) {
+
             button.style.display = "block";
+
         });
 
         return;
+
     }
 
+    // Hide normal subject buttons while searching.
 
-    // Hide normal subject buttons while searching
     subjectButtons.forEach(function(button) {
+
         button.style.display = "none";
-    });
-
-
-    // SUBJECTS
-
-    let subjects = [
-        {
-            name: "Oral Communication",
-            id: "oral"
-        },
-
-        {
-            name: "Physical Science",
-            id: "physical"
-        },
-
-        {
-            name: "Practical Research",
-            id: "research"
-        }
-    ];
-
-
-    // LESSONS
-
-    let lessons = [
-
-        {
-            name: "Lesson 1",
-            id: "oralLesson1",
-            subject: "Oral Communication"
-        },
-
-        {
-            name: "Lesson 2",
-            id: "oralLesson2",
-            subject: "Oral Communication"
-        },
-
-        {
-            name: "Lesson 3",
-            id: "oralLesson3",
-            subject: "Oral Communication"
-        },
-
-        {
-            name: "Lesson 1",
-            id: "physicalLesson1",
-            subject: "Physical Science"
-        },
-
-        {
-            name: "Lesson 2",
-            id: "physicalLesson2",
-            subject: "Physical Science"
-        },
-
-        {
-            name: "Lesson 3",
-            id: "physicalLesson3",
-            subject: "Physical Science"
-        },
-
-        {
-            name: "Lesson 1",
-            id: "researchLesson1",
-            subject: "Practical Research"
-        },
-
-        {
-            name: "Lesson 2",
-            id: "researchLesson2",
-            subject: "Practical Research"
-        },
-
-        {
-            name: "Lesson 3",
-            id: "researchLesson3",
-            subject: "Practical Research"
-        }
-
-    ];
-
-
-    // CHECK IF A SUBJECT MATCHES
-
-    let matchingSubject = subjects.find(function(subject) {
-
-        return subject.name.toLowerCase().includes(search);
 
     });
 
+    // Search every subject and its lessons.
 
-    // IF A SUBJECT MATCHES
+    reviewerData.forEach(function(subject) {
 
-    if (matchingSubject) {
+        const matchingSubject =
+            subject.name.toLowerCase().includes(search);
 
-        // SUBJECT LABEL
+        const matchingLessons = subject.lessons.filter(function(lesson) {
 
-        results.innerHTML += `
-            <div class="search-title">
-                SUBJECT
-            </div>
-        `;
+            const matchingTitle =
+                lesson.title.toLowerCase().includes(search);
 
+            const matchingContent = lesson.content.some(function(item) {
 
-        // SUBJECT BUTTON
+                return item.heading.toLowerCase().includes(search) ||
+                       item.text.toLowerCase().includes(search);
 
-        results.innerHTML += `
-            <button onclick="showSubject('${matchingSubject.id}')">
-                ${matchingSubject.name}
-            </button>
-        `;
+            });
 
-
-        // LESSON LABEL
-
-        results.innerHTML += `
-            <div class="search-title">
-                LESSON
-            </div>
-        `;
-
-
-        // GET LESSONS FOR THAT SUBJECT
-
-        let subjectLessons = lessons.filter(function(lesson) {
-
-            return lesson.subject === matchingSubject.name;
+            return matchingTitle || matchingContent;
 
         });
 
+        // Skip subjects with no matches.
 
-        // SHOW LESSONS
+        if (!matchingSubject && matchingLessons.length === 0) {
 
-        subjectLessons.forEach(function(lesson) {
+            return;
 
-            results.innerHTML += `
-                <button onclick="showLesson('${lesson.id}')">
-                    ${lesson.name}
-                </button>
-            `;
+        }
 
-        });
+        // Add the subject heading.
 
+        const title = document.createElement("div");
 
-        // STOP HERE
-        // This prevents the lessons from appearing twice.
+        title.className = "search-title";
 
-        return;
-    }
+        title.textContent = subject.name;
 
+        results.appendChild(title);
 
-    // IF NO SUBJECT MATCHES,
-    // SEARCH LESSONS INSTEAD
+        // Add a subject button if its name matches.
 
-    let matchingLessons = lessons.filter(function(lesson) {
+        if (matchingSubject) {
 
-        return lesson.name.toLowerCase().includes(search);
+            const button = document.createElement("button");
 
-    });
+            button.textContent = "Open " + subject.name;
 
+            button.onclick = function() {
 
-    if (matchingLessons.length > 0) {
+                showSubject(subject.id);
 
-        results.innerHTML += `
-            <div class="search-title">
-                LESSON
-            </div>
-        `;
+            };
 
+            results.appendChild(button);
+
+        }
+
+        // Add matching lesson buttons.
 
         matchingLessons.forEach(function(lesson) {
 
-            results.innerHTML += `
-                <button onclick="showLesson('${lesson.id}')">
-                    ${lesson.subject} - ${lesson.name}
-                </button>
-            `;
+            const button = document.createElement("button");
+
+            button.textContent = subject.name + " - " + lesson.title;
+
+            button.onclick = function() {
+
+                showLesson(subject.id, lesson.id);
+
+            };
+
+            results.appendChild(button);
 
         });
+
+    });
+
+    // Display a message if nothing matches.
+
+    if (results.innerHTML === "") {
+
+        results.textContent = "No subjects or lessons found.";
 
     }
 
 }
+
+// ==========================================
+// START THE WEBSITE
+// ==========================================
+
+initializeSubjects();
+
+showSubjects();
